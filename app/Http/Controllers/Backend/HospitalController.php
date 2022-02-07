@@ -22,7 +22,14 @@ class HospitalController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $hospitals = Hospital::latest()->get();
+            return view('backend.hospital.index',compact('hospitals'));
+        }
+        catch (\Exception $e) {
+            Toastr::warning($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**

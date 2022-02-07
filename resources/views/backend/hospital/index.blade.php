@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Sub Categories')
+@section('title','Hospitals')
 
 @push('vendor-css')
      <!-- Datatable -->
@@ -15,13 +15,13 @@
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
                     <h4>Hi, Welcome back!</h4>
-                    <span>Sub Categories</span>
+                    <span>Hospitals</span>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Sub Categories</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Hospitals</a></li>
                 </ol>
             </div>
         </div>
@@ -30,7 +30,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Sub Categories</h4>
+                        <h4 class="card-title">Hospitals</h4>
                         <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addNewModal">Add New</button>
                     </div>
                     <div class="card-body">
@@ -39,18 +39,24 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Category Name</th>
+                                        <th>Logo</th>
                                         <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Mobile</th>
                                         <th>Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($subcategories as $key=>$item)
+                                    @foreach ($hospitals as $key=>$item)
                                     <tr>
                                         <td>{{ $key+1}}</td>
-                                        <td>{{ $item->category->category_name }}</td>
-                                        <td>{{ $item->sub_category_name }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/hospitals/'.$item->logo)}}" width="123px" height="71px" alt="award image">
+                                        </td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->address }}</td>
+                                        <td>{{ $item->phone }}</td>
                                         <td>
                                         
                                             {{ $item->row_status ==  true ? 'Active' : 'Inactive'}}
@@ -65,7 +71,7 @@
                                                 <a  onclick="deleteItem({{$item->id}})"  class="btn btn-danger shadow btn-sm sharp">
                                                     <i class="fa fa-trash" style="color: #fff;font-size: 14px; "></i>
                                                 </a>
-                                                <form id="delete-form-{{$item->id}}" action="{{ route('sub-category.destroy',$item->id) }}" method="POST" style="display: none;">
+                                                <form id="delete-form-{{$item->id}}" action="{{ route('category.destroy',$item->id) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
@@ -89,27 +95,21 @@
             <div class="modal fade" id="addNewModal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="{{ route('sub-category.store')}}" method="POST">
+                        <form action="{{ route('hospital.store')}}" method="POST">
                             @csrf
                             <div class="modal-header">
-                                <h5 class="modal-title">Add New Sub Category</h5>
+                                <h5 class="modal-title">Add New Hospital</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                    <div class="row">
-                                        <label for="category_id">Category Name <span class="req">*</span> </label>
-                                        <select name="category_id" id="category_id" class="form-control">
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <label for="sub_category_name">Sub Category Name <span class="req">*</span> </label>
-                                        <input type="text" class="form-control" id="sub_category_name" name="sub_category_name" value="{{old('sub_category_name', empty($errors->sub_category_name) ? '' : $errors->sub_category_name)}}" placeholder="Sub Category Name">
-                                        @if ($errors->has('sub_category_name'))
-                                            <span class="text-danger">{{ $errors->first('sub_category_name') }}</span>
+                               
+                                    <div class="">
+                                        <label for="cname">Hospital Name <span class="req">*</span> </label>
+                                        {{-- <input type="text" id="cname" name="cname" class="form-control" placeholder="Category Name" > --}}
+                                        <input type="text" class="form-control" id="hospital_name" name="hospital_name" value="{{old('hospital_name', empty($errors->hospital_name) ? '' : $errors->hospital_name)}}" placeholder="Category Name">
+                                        @if ($errors->has('hospital_name'))
+                                            <span class="text-danger">{{ $errors->first('hospital_name') }}</span>
                                         @endif
                                     </div>
                                 
@@ -127,40 +127,37 @@
             <div class="modal fade" id="editModal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="{{ route('sub-category.update','1')}}" method="POST">
+                        <form action="{{ route('category.update','1')}}" method="POST">
                             @csrf
                             @method("PUT")
                             <div class="modal-header">
-                                <h5 class="modal-title">Edit Sub Category</h5>
+                                <h5 class="modal-title">Edit Category</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="row">
-                                    <label for="edit_category_id">Category Name <span class="req">*</span> </label>
-                                    <select name="category_id" id="edit_category_id" class="form-control">
-                                        @foreach ($categories as $category)
-                                            <option {{old('edit_category_id')== $category->id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                               
                                 <div class="row">
                                     <input type="text" id="row_id" name="old_id" hidden>
-                                    <label for="edit_sub_category_name">Sub Category Name <span class="req">*</span> </label>
-                                    <input type="text" class="form-control" id="edit_sub_category_name" name="sub_category_name" value="{{old('sub_category_name', empty($errors->sub_category_name) ? '' : $errors->sub_category_name)}}" placeholder="Sub Category Name">
-                                    @if ($errors->has('sub_category_name'))
-                                        <span class="text-danger">{{ $errors->first('sub_category_name') }}</span>
+                                    <label for="edit_category_name">Category Name <span class="req">*</span> </label>
+                                    <input type="text" class="form-control" id="edit_category_name" name="category_name" value="{{old('category_name', empty($errors->category_name) ? '' : $errors->category_name)}}" placeholder="Category Name">
+                                    @if ($errors->has('category_name'))
+                                        <span class="text-danger">{{ $errors->first('category_name') }}</span>
                                     @endif
                                 </div>
                                 <div class="row">
-                                    <label for="row_status" class="col-form-label">Status <span class="req">*</span></label>
-                                    <select name="row_status" id="row_status" class="form-control" required>
-                                        <option value="1" {{old('row_status')==1 ? 'selected' : ''}}>Active</option>
-                                        <option value="0" {{old('row_status')==0 ? 'selected' : ''}}>Inactive</option>
-                                    </select>
-                                    @if ($errors->has('row_status'))
-                                        <span class="text-danger">{{ $errors->first('row_status') }}</span>
-                                    @endif
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="row_status" class="col-form-label">Status <span class="red">*</span></label>
+                                            <select name="row_status" id="row_status" class="form-control" required>
+                                                <option value="1" {{old('row_status')==1 ? 'selected' : ''}}>Active</option>
+                                                <option value="0" {{old('row_status')==0 ? 'selected' : ''}}>Inactive</option>
+                                            </select>
+                                            @if ($errors->has('row_status'))
+                                                <span class="text-danger">{{ $errors->first('row_status') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -184,7 +181,6 @@
 @endpush
 @push('onpage-js')
     <script>
-        
         @if ($errors->any())
             $('#addNewModal').modal('show');
         @endif 
@@ -203,14 +199,13 @@
 
             $.ajax({
                 type    : "get",
-                url     : "{{ url('admin/sub-category') }}/" + row_id + "/edit",
+                url     : "{{ url('admin/category') }}/" + row_id + "/edit",
                 dataType: "json",
                 success : function(response){
                     var r_val = response.row_data;
-                    
+
                     $('#row_id').val(r_val.id);
-                    $('#edit_category_id').val(r_val.category_id);
-                    $('#edit_sub_category_name').val(r_val.sub_category_name);
+                    $('#edit_category_name').val(r_val.name);
                     $('#row_status').val(r_val.row_status);
                 },
                 error : function(response){
@@ -218,9 +213,6 @@
                 }
             });
             e.preventDefault();
-           
         });
-
-        
     </script>
 @endpush

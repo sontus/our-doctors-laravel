@@ -17,7 +17,14 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $doctors = Doctor::latest()->get();
+            return view('backend.doctor.index',compact('doctors'));
+        }
+        catch (\Exception $e) {
+            Toastr::warning($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**

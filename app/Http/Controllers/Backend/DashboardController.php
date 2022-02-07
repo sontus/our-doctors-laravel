@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     // Dashboard
-    public function dashboard()
+    public function index()
     {
         // Toastr::success('Success Success SuccessSuccessSuccessSuccess','Success');
         return view('backend.dashboard.dashboard');

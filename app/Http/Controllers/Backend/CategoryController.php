@@ -27,7 +27,7 @@ class CategoryController extends Controller
             return view('backend.category.index',compact('categories'));
         }
         catch (\Exception $e) {
-            Toastr::worning($e->getMessage());
+            Toastr::warning($e->getMessage());
             return redirect()->back();
         }
 
@@ -65,7 +65,7 @@ class CategoryController extends Controller
             return redirect()->back();
         }
         catch (\Exception $e) {
-            Toastr::worning($e->getMessage());
+            Toastr::warning($e->getMessage());
             return redirect()->back();
         }
 
@@ -120,7 +120,7 @@ class CategoryController extends Controller
             return redirect()->back();
         }
         catch (\Exception $e) {
-            Toastr::worning($e->getMessage());
+            Toastr::warning($e->getMessage());
             return redirect()->back();
         }
     }
@@ -139,7 +139,7 @@ class CategoryController extends Controller
             return redirect()->back();
         }
         catch (\Exception $e) {
-            Toastr::worning($e->getMessage());
+            Toastr::warning($e->getMessage());
             return redirect()->back();
         }
     }

@@ -35,7 +35,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/review-store', [App\Http\Controllers\HomeController::class, 'storeReview'])->name('review-store');
 
 Route::group(['prefix'=>'admin','middleware' => 'auth'],function (){
-    Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+    Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::resource('users',UsersController::class);
     Route::resource('category',CategoryController::class);
     Route::resource('hospital',HospitalController::class);

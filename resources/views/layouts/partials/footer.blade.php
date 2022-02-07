@@ -47,7 +47,7 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
-                <p class="mb-5">Copyright &copy; Our Doctors 2021.All Right Reserved </p>
+                <p class="mb-5">Copyright &copy; Our Doctors {{ date('Y')}}.All Right Reserved </p>
             </div>
         </div>
     </div>
