@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ChamberController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\HospitalController;
+use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Backend\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +33,13 @@ Route::get('/hospital-list', [App\Http\Controllers\HomeController::class, 'hospi
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/review-store', [App\Http\Controllers\HomeController::class, 'storeReview'])->name('review-store');
+
+Route::group(['prefix'=>'admin','middleware' => 'auth'],function (){
+    Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+    Route::resource('users',UsersController::class);
+    Route::resource('category',CategoryController::class);
+    Route::resource('hospital',HospitalController::class);
+    Route::resource('chamber',ChamberController::class);
+    Route::resource('doctor',DashboardController::class);
+    Route::resource('review',ReviewController::class);
+});
