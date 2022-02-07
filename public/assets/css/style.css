@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  /* header */
+  header {
+    background-color: #d3ede7;
+    min-height: 70px;
+  }
+  .search {
+    min-height: 400px;
+    background-color: #d3ede7;
+  }
+  .search h1 {
+    font-weight: 700;
+    color: #097d61;
+    margin-top: 120px;
+  }
+  header h1 > span {
+    text-decoration: underline;
+  }
+
+  /* search */
+  .search-box input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    /* margin: 8px 0; */
+    box-sizing: border-box;
+  }
+  .search-button {
+    padding: 10px 40px;
+  }
+  .search-result > span {
+    color: #097d61;
+  }
+
+  /* review */
+  .review {
+    background: #097d61;
+    height: 180px;
+    color: #fff;
+  }
+  .review h3 {
+    margin-top: 60px;
+    font-weight: 600;
+  }
+  .review button {
+    margin-top: 85px;
+    border: 2px solid #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px 30px;
+  }
+  /* hospital */
+  .hospitals h3 {
+    font-weight: 700;
+    color: #097d61;
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+  .hospital-box {
+    height: 275px;
+    margin-bottom: 100px;
+  }
+  .hospital-box h5 {
+    font-weight: 500;
+  }
+  .hospital-box button {
+    padding: 10px 20px;
+  }
+
+  .btncenter button {
+    padding: 15px 30px;
+    margin-top: -60px;
+    margin-bottom: 80px;
+    font-size: 18px;
+  }
+  /* category list */
+  .category-list ul li {
+    list-style-type: none;
+    padding: 5px 3px;
+  }
+  /* doctor */
+  .doctor {
+    height: 400px;
+    background: #d3ede7;
+    /* position: relative; */
+  }
+  .doctor h3 {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+    color: #097d61;
+  }
+  .doctor-image {
+    /* position: absolute; */
+    left: 60%;
+    top: -22%;
+  }
+  .doctor-image img {
+    width: 358px;
+    height: 400px;
+    text-align: right;
+  }
+
+  /* ===================== Doctor Details Page Start ====================== */
+  .doctor-detail img {
+    height: 237px;
+    width: 237px;
+    border: 2px solid #097d61;
+    border-radius: 5px;
+  }
+  .doctor-detail h3 {
+    font-weight: 600;
+    color: #097d61;
+  }
+  .doctor-detail h6 {
+    font-weight: 600;
+    color: #000;
+  }
+  .doctor-detail-action {
+    background-color: #d3ede7;
+    border-radius: 10px;
+    color: #000;
+  }
+  .doctor-detail-action span {
+    color: #097d61;
+  }
+  .add-review {
+    background-color: #f7f7f7;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 20px 10px;
+  }
+  .add-review p {
+    color: #097d61;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .add-review-star ul {
+    margin-left: -30px;
+  }
+  .add-review-star ul li {
+    display: inline-block;
+  }
+  .add-review-star ul li a {
+    color: #424242;
+    padding: 5px 10px;
+  }
+  .add-review-star ul li a:hover {
+    color: #ffa800;
+  }
+  .danger-info {
+    color: #bb0000;
+    font-size: 11px;
+  }
+  .doctor-reviews h4 {
+    font-family: Poppins;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 54px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #097d61;
+  }
+  .star ul {
+    margin-left: -30px;
+  }
+  .star ul li {
+    display: inline-block;
+    color: #ffa800;
+  }
+  /* ===================== Doctor Details Page End ====================== */
+  /* ===================== Doctor List Page Start ====================== */
+  .doctor-list {
+  }
+  .doctor-list img {
+    height: 140px;
+    width: 120px;
+  }
+  .review-star-box{
+    display: inline;
+  }
+  /* ===================== Doctor List Page End ====================== */
+  /* footer */
+  footer {
+    margin: 80px 0px;
+  }
+  footer h2 {
+    color: #097d61;
+  }
+  .footer-logo {
+    font-weight: 700;
+  }
+  .footer-text {
+    font-family: Poppins;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: #6d6d6d;
+  }
+
+  footer span {
+    color: #097d61;
+    font-weight: 600;
+  }
+  footer ul li {
+    list-style-type: none;
+    padding: 8px 0px;
+  }
+  footer ul li a {
+    text-decoration: none;
+    color: #000;
+  }
+  footer ul li a:hover {
+    color: #097d61;
+  }
+  .social-media h6 {
+    color: #097d61;
+    margin-top: 40px;
+  }
+  .social-media ul {
+    margin-left: -40px;
+  }
+  .social-media ul li {
+    display: inline-block;
+    padding: 8px;
+  }
+  .social-media ul li a {
+    display: inline-block;
+  }
