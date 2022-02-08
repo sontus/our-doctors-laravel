@@ -27,9 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name','asc')->get();
-        $doctors = Doctor::get();
-        $hospitals   = Hospital::latest()->limit(8)->get();
+        $categories     = Category::orderBy('name','asc')->get();
+        $doctors        = Doctor::get();
+        $hospitals      = Hospital::latest()->limit(8)->get();
         return view('index',compact('categories','doctors','hospitals'));
     }
 

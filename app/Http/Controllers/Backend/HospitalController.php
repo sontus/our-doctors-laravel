@@ -146,7 +146,7 @@ class HospitalController extends Controller
             // Delete old image
             if (Storage::disk('public')->exists('hospitals/'.$hospital->logo))
             {
-                Storage::disk('public')->delete('hospitals/'.$hospital->log);
+                Storage::disk('public')->delete('hospitals/'.$hospital->logo);
             }
             $hospital->delete();
             Toastr::success('Hospital Successfully Deleted');

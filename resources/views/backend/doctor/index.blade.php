@@ -39,7 +39,14 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Image</th>
                                         <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Hospital</th>
+                                        <th>Degree</th>
+                                        <th>Mobile</th>
+                                        <th>Experince</th>
+                                        <th>Address</th>
                                         <th>Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
@@ -48,11 +55,18 @@
                                     @foreach ($doctors as $key=>$item)
                                     <tr>
                                         <td>{{ $key+1}}</td>
-                                        <td>{{ $item->name }}</td>
                                         <td>
-                                        
+                                            <img src="{{ asset('storage/doctors/'.$item->image)}}" width="123px" height="71px" alt="award image">
+                                        </td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->category->name }}</td>
+                                        <td>{{ $item->hospital->name }}</td>
+                                        <td>{{ $item->degree }}</td>
+                                        <td>{{ $item->mobile }}</td>
+                                        <td>{{ $item->age }}</td>
+                                        <td>{{ $item->address }}</td>
+                                        <td>
                                             {{ $item->row_status ==  true ? 'Active' : 'Inactive'}}
-                                            
                                         </td>
                                         <td>
                                             <div class="text-center">
@@ -85,26 +99,99 @@
              
             <!--Add New Modal -->
             <div class="modal fade" id="addNewModal">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="{{ route('category.store')}}" method="POST">
+                        <form action="{{ route('doctor.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-header">
-                                <h5 class="modal-title">Add New Category</h5>
+                                <h5 class="modal-title">Add New Doctor</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                               
-                                    <div class="">
-                                        <label for="cname">Category Name <span class="req">*</span> </label>
-                                        {{-- <input type="text" id="cname" name="cname" class="form-control" placeholder="Category Name" > --}}
-                                        <input type="text" class="form-control" id="category_name" name="category_name" value="{{old('category_name', empty($errors->category_name) ? '' : $errors->category_name)}}" placeholder="Category Name">
-                                        @if ($errors->has('category_name'))
-                                            <span class="text-danger">{{ $errors->first('category_name') }}</span>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="doctor_name">Doctor Name <span class="req">*</span> </label>
+                                        <input type="text" class="form-control" id="doctor_name" name="doctor_name" value="{{old('doctor_name', empty($errors->doctor_name) ? '' : $errors->doctor_name)}}" placeholder="Doctor Name">
+                                        @if ($errors->has('doctor_name'))
+                                            <span class="text-danger">{{ $errors->first('doctor_name') }}</span>
                                         @endif
                                     </div>
-                                
+                                    <div class="col-md-6">
+                                        <label for="doctor_degree">Doctor Degree <span class="req">*</span> </label>
+                                        <input type="text" class="form-control" id="doctor_degree" name="doctor_degree" value="{{old('doctor_degree', empty($errors->doctor_degree) ? '' : $errors->doctor_degree)}}" placeholder="Doctor Degree">
+                                        @if ($errors->has('doctor_degree'))
+                                            <span class="text-danger">{{ $errors->first('doctor_degree') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="doctor_category">Doctor Category <span class="req">*</span> </label>
+                                        <select name="doctor_category" id="doctor_category" class="form-control">
+                                            @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                        @if ($errors->has('doctor_category'))
+                                            <span class="text-danger">{{ $errors->first('doctor_category') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="doctor_hospital">Doctor Hospital <span class="req">*</span> </label>
+                                        <select name="doctor_hospital" id="doctor_hospital" class="form-control">
+                                            @foreach ($hospitals as $hospital)
+                                            <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                        @if ($errors->has('doctor_hospital'))
+                                            <span class="text-danger">{{ $errors->first('doctor_hospital') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="doctor_mobile">Doctor Mobile <span class="req">*</span> </label>
+                                        <input type="number" min="0" class="form-control" id="doctor_mobile" name="doctor_mobile" value="{{old('doctor_mobile', empty($errors->doctor_mobile) ? '' : $errors->doctor_mobile)}}" placeholder="Doctor Mobile">
+                                        @if ($errors->has('doctor_mobile'))
+                                            <span class="text-danger">{{ $errors->first('doctor_mobile') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="doctor_experince">Doctor Experince <span class="req">*</span> </label>
+                                        <input type="number" min="0" class="form-control" id="doctor_experince" name="doctor_experince" value="{{old('doctor_experince', empty($errors->doctor_experince) ? '' : $errors->doctor_experince)}}" placeholder="Doctor Experince">
+                                        @if ($errors->has('doctor_experince'))
+                                            <span class="text-danger">{{ $errors->first('doctor_experince') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="doctor_address">Doctor Address <span class="req">*</span> </label>
+                                        <input type="text" class="form-control" id="doctor_address" name="doctor_address" value="{{old('doctor_address', empty($errors->doctor_address) ? '' : $errors->doctor_address)}}" placeholder="Doctor Mobile">
+                                        @if ($errors->has('doctor_address'))
+                                            <span class="text-danger">{{ $errors->first('doctor_address') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="doctor_image">Doctor Image <span class="req">*</span> </label>
+                                        <input type="file" class="form-control" id="doctor_image" name="doctor_image" value="{{old('doctor_image', empty($errors->doctor_image) ? '' : $errors->doctor_image)}}">
+                                        @if ($errors->has('doctor_image'))
+                                            <span class="text-danger">{{ $errors->first('doctor_image') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label for="doctor_details">Doctor Details <span class="req">*</span> </label>
+                                        <textarea name="doctor_details" class="form-control" id="doctor_details" cols="30" rows="4"></textarea>
+                                        @if ($errors->has('doctor_details'))
+                                            <span class="text-danger">{{ $errors->first('doctor_details') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
@@ -117,41 +204,101 @@
           
             <!--Edit Modal -->
             <div class="modal fade" id="editModal">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="{{ route('category.update','1')}}" method="POST">
+                        <form action="{{ route('doctor.update','1')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method("PUT")
                             <div class="modal-header">
-                                <h5 class="modal-title">Edit Category</h5>
+                                <h5 class="modal-title">Edit Doctor</h5>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                               
                                 <div class="row">
-                                    <input type="text" id="row_id" name="old_id" hidden>
-                                    <label for="edit_category_name">Category Name <span class="req">*</span> </label>
-                                    <input type="text" class="form-control" id="edit_category_name" name="category_name" value="{{old('category_name', empty($errors->category_name) ? '' : $errors->category_name)}}" placeholder="Category Name">
-                                    @if ($errors->has('category_name'))
-                                        <span class="text-danger">{{ $errors->first('category_name') }}</span>
-                                    @endif
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <label for="row_status" class="col-form-label">Status <span class="red">*</span></label>
-                                            <select name="row_status" id="row_status" class="form-control" required>
-                                                <option value="1" {{old('row_status')==1 ? 'selected' : ''}}>Active</option>
-                                                <option value="0" {{old('row_status')==0 ? 'selected' : ''}}>Inactive</option>
-                                            </select>
-                                            @if ($errors->has('row_status'))
-                                                <span class="text-danger">{{ $errors->first('row_status') }}</span>
-                                            @endif
-                                        </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="row_id" name="old_id" hidden>
+                                        <label for="edit_doctor_name">Doctor Name <span class="req">*</span> </label>
+                                        <input type="text" class="form-control" id="edit_doctor_name" name="doctor_name" value="{{old('doctor_name', empty($errors->doctor_name) ? '' : $errors->doctor_name)}}" placeholder="Doctor Name">
+                                        @if ($errors->has('doctor_name'))
+                                            <span class="text-danger">{{ $errors->first('doctor_name') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="edit_doctor_degree">Doctor Degree <span class="req">*</span> </label>
+                                        <input type="text" class="form-control" id="edit_doctor_degree" name="doctor_degree" value="{{old('doctor_degree', empty($errors->doctor_degree) ? '' : $errors->doctor_degree)}}" placeholder="Doctor Degree">
+                                        @if ($errors->has('doctor_degree'))
+                                            <span class="text-danger">{{ $errors->first('doctor_degree') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                                
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="edit_doctor_category_id">Doctor Category <span class="req">*</span> </label>
+                                        <select name="doctor_category" id="edit_doctor_category_id" class="form-control">
+                                            @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                        @if ($errors->has('doctor_category'))
+                                            <span class="text-danger">{{ $errors->first('doctor_category') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="edit_doctor_hospital_id">Doctor Hospital <span class="req">*</span> </label>
+                                        <select name="doctor_hospital" id="edit_doctor_hospital_id" class="form-control">
+                                            @foreach ($hospitals as $hospital)
+                                            <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                        @if ($errors->has('doctor_hospital'))
+                                            <span class="text-danger">{{ $errors->first('doctor_hospital') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="edit_doctor_mobile">Doctor Mobile <span class="req">*</span> </label>
+                                        <input type="number" min="0" class="form-control" id="edit_doctor_mobile" name="doctor_mobile" value="{{old('doctor_mobile', empty($errors->doctor_mobile) ? '' : $errors->doctor_mobile)}}" placeholder="Doctor Mobile">
+                                        @if ($errors->has('doctor_mobile'))
+                                            <span class="text-danger">{{ $errors->first('doctor_mobile') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="edit_doctor_age">Doctor Experince <span class="req">*</span> </label>
+                                        <input type="number" min="0" class="form-control" id="edit_doctor_age" name="doctor_experince" value="{{old('doctor_experince', empty($errors->doctor_experince) ? '' : $errors->doctor_experince)}}" placeholder="Doctor Experince">
+                                        @if ($errors->has('doctor_experince'))
+                                            <span class="text-danger">{{ $errors->first('doctor_experince') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="edit_doctor_address">Doctor Address <span class="req">*</span> </label>
+                                        <input type="text" class="form-control" id="edit_doctor_address" name="doctor_address" value="{{old('doctor_address', empty($errors->doctor_address) ? '' : $errors->doctor_address)}}" placeholder="Doctor Mobile">
+                                        @if ($errors->has('doctor_address'))
+                                            <span class="text-danger">{{ $errors->first('doctor_address') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="doctor_image">Doctor Image <span class="req">*</span> </label>
+                                        <input type="file" class="form-control" id="doctor_image" name="doctor_image" value="{{old('doctor_image', empty($errors->doctor_image) ? '' : $errors->doctor_image)}}">
+                                        @if ($errors->has('doctor_image'))
+                                            <span class="text-danger">{{ $errors->first('doctor_image') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label for="edit_doctor_details">Doctor Details <span class="req">*</span> </label>
+                                        <textarea name="doctor_details" class="form-control" id="edit_doctor_details" cols="30" rows="4"></textarea>
+                                        @if ($errors->has('doctor_details'))
+                                            <span class="text-danger">{{ $errors->first('doctor_details') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
@@ -191,13 +338,20 @@
 
             $.ajax({
                 type    : "get",
-                url     : "{{ url('admin/category') }}/" + row_id + "/edit",
+                url     : "{{ url('admin/doctor') }}/" + row_id + "/edit",
                 dataType: "json",
                 success : function(response){
                     var r_val = response.row_data;
 
                     $('#row_id').val(r_val.id);
-                    $('#edit_category_name').val(r_val.name);
+                    $('#edit_doctor_name').val(r_val.name);
+                    $('#edit_doctor_category_id').val(r_val.category_id );
+                    $('#edit_doctor_hospital_id').val(r_val.hospital_id);
+                    $('#edit_doctor_degree').val(r_val.degree);
+                    $('#edit_doctor_mobile').val(r_val.mobile);
+                    $('#edit_doctor_address').val(r_val.address);
+                    $('#edit_doctor_age').val(r_val.age);
+                    $('#edit_doctor_details').val(r_val.details);
                     $('#row_status').val(r_val.row_status);
                 },
                 error : function(response){

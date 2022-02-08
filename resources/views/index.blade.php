@@ -47,7 +47,7 @@
                 @foreach ($doctors as $key=> $doctor)
                     <div class="row">
                         <div class="col-sm-2 col-md-2 col-lg-2 offset-1">
-                            <img src="{{ asset('assets/img/'.$doctor->image )}}" alt="doctors" >
+                            <img src="{{ asset('storage/doctors/'.$doctor->image )}}" alt="doctors" >
                         </div>
                         <div class="col-sm-5 col-md-5 col-lg-5">
                             <h4> <a href="{{ route('doctor-detail',$doctor->id)}}"> {{ $doctor->name }}</a> </h4>
@@ -101,7 +101,7 @@
         <div class="row">
             @foreach ($hospitals as $hospital)
                 <div class="col-sm-12 col-md-3 col-lg-3 hospital-box">
-                    <img src="{{ asset('assets/img/'.$hospital->logo)}}" alt="hospital">
+                    <img src="{{ asset('storage/hospitals/'.$hospital->logo)}}" alt="hospital">
                     <h5>{{ $hospital->name }}</h5>
                     <p>{{ $hospital->address }}</p>
                     <button class="btn btn-outline-success"><span class="fas fa-map-marker-alt ml-2"></span> Show on Maps</button>

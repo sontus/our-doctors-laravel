@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChamberController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\HospitalController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\UsersController;
@@ -42,6 +43,6 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'],function (){
     Route::get('/gtDist/{id?}', [HospitalController::class,'getDistrictByDivision'])->name('gtDist');
     Route::get('/gtUpz/{id?}', [HospitalController::class,'getUpazillaByDistrict'])->name('gtUpz');
     Route::resource('chamber',ChamberController::class);
-    Route::resource('doctor',DashboardController::class);
+    Route::resource('doctor',DoctorController::class);
     Route::resource('review',ReviewController::class);
 });

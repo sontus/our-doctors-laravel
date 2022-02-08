@@ -9,7 +9,7 @@
 <div class="container doctor-detail">
     <div class="row  mt-5">
         <div class="col-sm-3 col-md-3 col-lg-3 offset-1">
-            <img src="{{ asset('assets/img/'.$details->image )}}" alt="doctors" >
+            <img src="{{ asset('storage/doctors/'.$details->image )}}" alt="doctors" >
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8">
             <h4>{{ $details->name }}</h4>
