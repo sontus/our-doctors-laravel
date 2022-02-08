@@ -21,6 +21,7 @@ class CreateChambersTable extends Migration
             $table->string('consulting_hrs');
             $table->string('visitfees_one');
             $table->string('visitfees_two')->nullable();
+            $table->string('mobile','20');
             $table->boolean('row_status')->default(true);
             $table->foreign('doctor_id')
                     ->references('id')->on('doctors')

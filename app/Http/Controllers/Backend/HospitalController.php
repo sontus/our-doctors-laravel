@@ -29,8 +29,8 @@ class HospitalController extends Controller
         try{
             $divisions = Division::latest()->get();
             $hospitals = Hospital::latest()->get();
-            // dd($hospitals);
             return view('backend.hospital.index',compact('divisions','hospitals'));
+
         }
         catch (\Exception $e) {
             Toastr::warning($e->getMessage());
