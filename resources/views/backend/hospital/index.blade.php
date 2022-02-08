@@ -42,6 +42,9 @@
                                         <th>Logo</th>
                                         <th>Name</th>
                                         <th>Address</th>
+                                        {{-- <th>Division</th>
+                                        <th>District</th>
+                                        <th>Upazila</th> --}}
                                         <th>Mobile</th>
                                         <th>Status</th>
                                         <th class="text-center">Action</th>
@@ -56,6 +59,9 @@
                                         </td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->address }}</td>
+                                          {{-- <td>{{ $item->division->division->name }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->address }}</td> --}}
                                         <td>{{ $item->phone }}</td>
                                         <td>
                                         
@@ -71,7 +77,7 @@
                                                 <a  onclick="deleteItem({{$item->id}})"  class="btn btn-danger shadow btn-sm sharp">
                                                     <i class="fa fa-trash" style="color: #fff;font-size: 14px; "></i>
                                                 </a>
-                                                <form id="delete-form-{{$item->id}}" action="{{ route('category.destroy',$item->id) }}" method="POST" style="display: none;">
+                                                <form id="delete-form-{{$item->id}}" action="{{ route('hospital.destroy',$item->id) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
@@ -93,9 +99,9 @@
              
             <!--Add New Modal -->
             <div class="modal fade" id="addNewModal">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="{{ route('hospital.store')}}" method="POST">
+                        <form action="{{ route('hospital.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-header">
                                 <h5 class="modal-title">Add New Hospital</h5>
@@ -104,13 +110,71 @@
                             </div>
                             <div class="modal-body">
                                
-                                    <div class="">
-                                        <label for="cname">Hospital Name <span class="req">*</span> </label>
-                                        {{-- <input type="text" id="cname" name="cname" class="form-control" placeholder="Category Name" > --}}
-                                        <input type="text" class="form-control" id="hospital_name" name="hospital_name" value="{{old('hospital_name', empty($errors->hospital_name) ? '' : $errors->hospital_name)}}" placeholder="Category Name">
-                                        @if ($errors->has('hospital_name'))
-                                            <span class="text-danger">{{ $errors->first('hospital_name') }}</span>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="hospital_name">Hospital Name <span class="req">*</span> </label>
+                                            <input type="text" class="form-control" id="hospital_name" name="hospital_name" value="{{old('hospital_name', empty($errors->hospital_name) ? '' : $errors->hospital_name)}}" placeholder="Hospital Name">
+                                            @if ($errors->has('hospital_name'))
+                                                <span class="text-danger">{{ $errors->first('hospital_name') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="division_id">Division <span class="req">*</span> </label>
+                                        <select name="division_id" id="division_id" class="form-control">
+                                            @foreach ($divisions as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('division_id'))
+                                            <span class="text-danger">{{ $errors->first('division_id') }}</span>
                                         @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="district_id" class="col-form-label">District Name <span class="req">*</span></label>
+                                                <select name="district_id" id="district_id" class="form-control" required>
+                                                    <option value="0">Select One</option>
+                                                </select>
+                                                @if ($errors->has('district_id'))
+                                                    <span class="text-danger">{{ $errors->first('district_id') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label for="upazilla_id" class="col-form-label">Upazilla Name <span class="req">*</span> </label>
+                                                 <select name="upazilla_id" id="upazilla_id" class="form-control" required>
+                                                    <option value="0">Select One</option>
+                                                </select>
+                                                @if ($errors->has('upazilla_id'))
+                                                    <span class="text-danger">{{ $errors->first('upazilla_id') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="hospital_mobile">Hospital Mobile <span class="req">*</span> </label>
+                                            <input type="number" min="0" class="form-control" id="hospital_mobile" name="hospital_mobile" value="{{old('hospital_mobile', empty($errors->hospital_mobile) ? '' : $errors->hospital_mobile)}}" placeholder="01712345678">
+                                            @if ($errors->has('hospital_mobile'))
+                                                <span class="text-danger">{{ $errors->first('hospital_mobile') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="hospital_logo">Hospital Logo <span class="req">*</span> </label>
+                                            <input type="file" class="form-control" id="hospital_logo" name="hospital_logo" value="{{old('hospital_logo', empty($errors->hospital_logo) ? '' : $errors->hospital_logo)}}" placeholder=">Hospital Name">
+                                            @if ($errors->has('hospital_logo'))
+                                                <span class="text-danger">{{ $errors->first('hospital_logo') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="hospital_address">Hospital Address <span class="req">*</span> </label>
+                                            <textarea name="hospital_address" id="hospital_address" cols="30" rows="4" class="form-control"></textarea>
+                                        </div>
                                     </div>
                                 
                             </div>
@@ -213,6 +277,73 @@
                 }
             });
             e.preventDefault();
+        });
+
+        //division_id
+        $(document).on('change','#division_id',function(){
+            var id=$(this).val();
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var op1 = '<option value="0">Select One</option>';
+            $('#district_id').html(op1);
+            $('#upazilla_id').html(op1);
+            $('#union_id').html(op1);
+
+            $.ajax({
+                type    : "get",
+                url     : "{{ route('gtDist') }}/" + id,
+                dataType: "json",
+                success : function(response){
+                    // console.log(response);
+                    
+                    $.each(response.rows, function(i, v) { 
+                        op1 += '<option value="'+v.id+'">' +v.name+ '</option>';
+                    });
+                    $('#district_id').html(op1);
+                    $('select').select2({
+                        width : '100%' // need to override the changed default
+                    });
+                },
+                error : function(response){
+                    alert("Error")
+                }
+            });
+        });
+
+//Upazilla
+
+        $(document).on('change','#district_id',function(){
+            var id=$(this).val();
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var op1 = '<option value="0">Select One</option>';
+            $('#upazilla_id').html(op1);
+            $('#union_id').html(op1);
+            $.ajax({
+                type    : "get",
+                url     : "{{ route('gtUpz') }}/" + id,
+                dataType: "json",
+                success : function(response){
+                    // console.log(response);
+                    
+                    $.each(response.rows, function(i, v) { 
+                        op1 += '<option value="'+v.id+'">' +v.name+ '</option>';
+                    });
+                    $('#upazilla_id').html(op1);
+                    $('select').select2({
+                        width : '100%' // need to override the changed default
+                    });
+                },
+                error : function(response){
+                    alert("Error")
+                }
+            });
         });
     </script>
 @endpush

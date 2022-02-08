@@ -39,6 +39,8 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'],function (){
     Route::resource('users',UsersController::class);
     Route::resource('category',CategoryController::class);
     Route::resource('hospital',HospitalController::class);
+    Route::get('/gtDist/{id?}', [HospitalController::class,'getDistrictByDivision'])->name('gtDist');
+    Route::get('/gtUpz/{id?}', [HospitalController::class,'getUpazillaByDistrict'])->name('gtUpz');
     Route::resource('chamber',ChamberController::class);
     Route::resource('doctor',DashboardController::class);
     Route::resource('review',ReviewController::class);
