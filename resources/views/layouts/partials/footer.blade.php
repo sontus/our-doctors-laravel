@@ -27,8 +27,8 @@
                     <ul>
                         <span>Patients</span>
                         <li> <a href="#"> Write a review</a></li>
-                        <li> <a href="#">Doctors A-Z</a></li>
-                        <li> <a href="#">Hospitals A-Z</a></li>
+                        <li> <a href="{{ route('doctor')}}">Doctors A-Z</a></li>
+                        <li> <a href="{{ route('hospital')}}">Hospitals A-Z</a></li>
                         <li> <a href="#">Health News</a></li>
                     </ul>
                 </div>

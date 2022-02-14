@@ -64,6 +64,7 @@ class HospitalController extends Controller
             'upazilla_id'       => 'required',
             'hospital_mobile'   => 'required',
             'hospital_address'  => 'required',
+            'hospital_location' => 'required',
             'hospital_logo'     => 'required|mimes:jpg,png,gif,jpeg|max:2048',
         ]);
         
@@ -77,6 +78,7 @@ class HospitalController extends Controller
             $hospital->upazila_id       = $request->upazilla_id;
             $hospital->phone            = $request->hospital_mobile;
             $hospital->address          = $request->hospital_address;
+            $hospital->map_location     = $request->hospital_location;
             $hospital->logo             = $fileName;
             $hospital->save();
     
@@ -119,7 +121,7 @@ class HospitalController extends Controller
      */
     public function edit(Hospital $hospital)
     {
-        //
+        return response()->json(['row_data' => $hospital],200);
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateHospitalsTable extends Migration
             $table->unsignedTinyInteger('division_id');
             $table->unsignedTinyInteger('district_id');
             $table->unsignedTinyInteger('division_id');
+            $table->text('map_location');
             $table->string('address');
             $table->boolean('row_status')->default(true);
             $table->string('logo')->nullable();

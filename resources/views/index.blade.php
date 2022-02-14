@@ -17,8 +17,9 @@
 
         <div class="row mt-5 search-box">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="Search for doctor, hospital or specialist" aria-label="Search">
+                <form class="d-flex" action="{{ route('doctor-search')}}" method="GET">
+                    @csrf
+                    <input class="form-control me-2" type="text" placeholder="Search for doctor name or specialist name" aria-label="Search" name="doctor_name">
 
                     <button class="btn btn-success search-button" type="submit">SEARCH</button>
                 </form>
@@ -104,13 +105,13 @@
                     <img src="{{ asset('storage/hospitals/'.$hospital->logo)}}" alt="hospital">
                     <h5>{{ $hospital->name }}</h5>
                     <p>{{ $hospital->address }}</p>
-                    <button class="btn btn-outline-success"><span class="fas fa-map-marker-alt ml-2"></span> Show on Maps</button>
+                    <a href="{{ $hospital->map_location }}" class="btn btn-outline-success" target="_blank"><span class="fas fa-map-marker-alt ml-2"></span> Show on Maps</a>
                 </div>
             @endforeach
         </div>
         <div class="btncontainer">
             <div class="btncenter">
-                <button class="btn btn-outline-success">View All <i class="fas fa-arrow-right"></i></button>
+                <a href="{{ route('hospital')}}" class="btn btn-outline-success mb-5">View All <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </div>

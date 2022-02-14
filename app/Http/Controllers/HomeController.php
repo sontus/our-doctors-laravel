@@ -61,6 +61,16 @@ class HomeController extends Controller
         return view('doctor-details',compact('details','reviews'));
     }
 
+    // search-doctor
+    public function search_doctor(Request $request)
+    {
+       
+        $doctors        = Doctor::where('name', 'LIKE', "%{$request->doctor_name}%")->get();
+
+        // dd($doctors);
+        return view('doctor-result',compact('doctors'));
+
+    }
     // review store
     public function storeReview(Request $request)
     {
