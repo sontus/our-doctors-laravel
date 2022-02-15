@@ -128,7 +128,7 @@
                     <p>
                         Your future patients are ready to connect. Make sure your profile stands out. Learn more about how to claim your free profile and get visible to thousands of patients.
                     </p>
-                    <button class="btn btn-success mt-2">Claim your profile</button>
+                    <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#signup">Claim your profile</button>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 doctor-image">
                     <img src="assets/img/doctor.png" alt="doctor"/>

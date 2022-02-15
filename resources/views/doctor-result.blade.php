@@ -21,7 +21,7 @@
                     <form class="d-flex" action="{{ route('doctor-search')}}" method="GET">
                         @csrf
                         <input class="form-control me-2" type="text" placeholder="Search for doctor name or specialist name" aria-label="Search" name="doctor_name">
-    
+
                         <button class="btn btn-success search-button" type="submit">SEARCH</button>
                     </form>
                 </div>
@@ -37,9 +37,8 @@
     <!-- doctors start -->
     <div class="container m-5">
         <div class="row doctor-list">
-            <div class="col-sm-12 col-md-3 col-lg-3 category-list">
-            </div>
-            <div class="col-sm-12 col-md-9 col-lg-9">
+
+            <div class="col-sm-12 col-md-9 col-lg-9 offset-1">
 
                 @foreach ($doctors as $key=> $doctor)
                     <div class="row">
@@ -47,7 +46,7 @@
                             <img src="{{ asset('storage/doctors/'.$doctor->image )}}" alt="doctors" >
                         </div>
                         <div class="col-sm-5 col-md-5 col-lg-5">
-                            <h4> <a href="{{ route('doctor-detail',$doctor->id)}}"> {{ $doctor->name }}</a> </h4>
+                            <h4> <a href="{{ route('doctor-detail',$doctor->id)}}"> {{ $doctor->doctor_name }}</a> </h4>
                             <p>{{ $doctor->category->name}}  |  Experience {{ $doctor->age}}+ years</p>
                             <p>{{ $doctor->degree}}</p>
                             <div class="review-star-box">

@@ -6,16 +6,16 @@
 	<meta name="author" content="" />
 	<meta name="robots" content="" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="description" content="AASCO - Web" />
-	<meta property="og:title" content="AASCO - Web" />
-	<meta property="og:description" content="AASCO - Web" />
+	<meta name="description" content="Our-Doctors - Web" />
+	<meta property="og:title" content="Our-Doctors - Web" />
+	<meta property="og:description" content="Our-Doctors - Web" />
 	<meta property="og:image" content="" />
 	<meta name="format-detection" content="telephone=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AASCO') }} | @yield('title')</title>
+    <title>{{ config('app.name', 'Our-Doctors') }} | @yield('title')</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- laravel-toastr css -->
@@ -78,15 +78,15 @@
             Footer end
         ***********************************-->
     </div>
- 
+
     <!-- Required vendors -->
     <script src="{{ asset('assets/backend/vendor/global/global.min.js')}}"></script>
     <script src="{{ asset('assets/backend/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
     {{-- <script src="{{ asset('assets/backend/vendor/chart.js/Chart.bundle.min.js')}}"></script> --}}
-    
+
     <!-- Dashboard 1 -->
     {{-- <script src="{{ asset('assets/backend/js/dashboard/dashboard-1.js')}}"></script> --}}
-    
+
     {{-- <script src="{{ asset('assets/backend/vendor/chart.js/Chart.bundle.min.js')}}"></script> --}}
     <script src="{{ asset('assets/backend/js/custom.min.js')}}"></script>
     <script src="{{ asset('assets/backend/js/deznav-init.js')}}"></script>

@@ -6,7 +6,7 @@
      <link href="{{ asset('assets/backend/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 @endpush
 @push('onpage-css')
-    
+
 @endpush
 @section('content')
 <div class="content-body">
@@ -77,26 +77,26 @@
                                                 <a  onclick="deleteItem({{$item->id}})"  class="btn btn-danger shadow btn-sm sharp">
                                                     <i class="fa fa-trash" style="color: #fff;font-size: 14px; "></i>
                                                 </a>
-                                                <form id="delete-form-{{$item->id}}" action="{{ route('category.destroy',$item->id) }}" method="POST" style="display: none;">
+                                                <form id="delete-form-{{$item->id}}" action="{{ route('doctor.destroy',$item->id) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                            </div>	
-                                            
-                                            
-                                       
-                                    
-                                        </td>												
+                                            </div>
+
+
+
+
+                                        </td>
                                     </tr>
                                     @endforeach
-                                   
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-             
+
             <!--Add New Modal -->
             <div class="modal fade" id="addNewModal">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -132,7 +132,7 @@
                                             @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
-                                            
+
                                         </select>
                                         @if ($errors->has('doctor_category'))
                                             <span class="text-danger">{{ $errors->first('doctor_category') }}</span>
@@ -144,7 +144,7 @@
                                             @foreach ($hospitals as $hospital)
                                             <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                             @endforeach
-                                            
+
                                         </select>
                                         @if ($errors->has('doctor_hospital'))
                                             <span class="text-danger">{{ $errors->first('doctor_hospital') }}</span>
@@ -201,7 +201,7 @@
                     </div>
                 </div>
             </div>
-          
+
             <!--Edit Modal -->
             <div class="modal fade" id="editModal">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -239,7 +239,7 @@
                                             @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
-                                            
+
                                         </select>
                                         @if ($errors->has('doctor_category'))
                                             <span class="text-danger">{{ $errors->first('doctor_category') }}</span>
@@ -251,7 +251,7 @@
                                             @foreach ($hospitals as $hospital)
                                             <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                             @endforeach
-                                            
+
                                         </select>
                                         @if ($errors->has('doctor_hospital'))
                                             <span class="text-danger">{{ $errors->first('doctor_hospital') }}</span>
@@ -322,7 +322,7 @@
     <script>
         @if ($errors->any())
             $('#addNewModal').modal('show');
-        @endif 
+        @endif
 
         // edit
         $(document).on('click', '.edit_row', function(e) {

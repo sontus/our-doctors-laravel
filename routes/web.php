@@ -32,6 +32,7 @@ Route::get('/doctor-category/{id}', [App\Http\Controllers\HomeController::class,
 Route::get('/doctor/{id}', [App\Http\Controllers\HomeController::class, 'doctorDetails'])->name('doctor-detail');
 Route::get('/hospital-list', [App\Http\Controllers\HomeController::class, 'hospital'])->name('hospital');
 Route::get('/search-doctor',[App\Http\Controllers\HomeController::class, 'search_doctor'])->name('doctor-search');
+Route::post('/doctor-register',[App\Http\Controllers\HomeController::class, 'doctor_register'])->name('doctor-register');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/review-store', [App\Http\Controllers\HomeController::class, 'storeReview'])->name('review-store');
@@ -51,6 +52,6 @@ Route::get('clear-all-developer', function () {
     Artisan::call('storage:link');
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
-  
+
     return redirect()->back();
 });
