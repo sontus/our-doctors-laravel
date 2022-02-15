@@ -131,6 +131,23 @@ class HomeController extends Controller
         return view('doctor-result',compact('doctors'));
 
     }
+
+    // // doctor_list_by_division
+    // public function doctor_list_by_division($id)
+    // {
+    //     $doctors        = Doctor::select('doctors.*',
+    //                         'doctors.name as doctor_name',
+    //                         'divisions.id',
+    //                         'hospitals.division_id',
+    //                         )
+    //                     ->leftJoin('divisions', 'hospitals.division_id', '=', 'divisions.id')
+    //                     ->where('divisions.name',$id)
+
+    //                     ->get();
+
+    //     dd($doctors);
+    //     return view('doctor-by-division.php',compact('doctors'));
+    // }
     // review store
     public function storeReview(Request $request)
     {

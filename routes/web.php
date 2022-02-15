@@ -33,6 +33,7 @@ Route::get('/doctor/{id}', [App\Http\Controllers\HomeController::class, 'doctorD
 Route::get('/hospital-list', [App\Http\Controllers\HomeController::class, 'hospital'])->name('hospital');
 Route::get('/search-doctor',[App\Http\Controllers\HomeController::class, 'search_doctor'])->name('doctor-search');
 Route::post('/doctor-register',[App\Http\Controllers\HomeController::class, 'doctor_register'])->name('doctor-register');
+Route::get('/doctor-list-by-division/{id}', [App\Http\Controllers\HomeController::class, 'doctor_list_by_division'])->name('doctor-list-by-division');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/review-store', [App\Http\Controllers\HomeController::class, 'storeReview'])->name('review-store');

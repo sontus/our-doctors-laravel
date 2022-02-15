@@ -34,11 +34,16 @@
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
                     <ul>
-                        <span>Top Local Doctors</span>
+                        <span>Top Local Hospital</span>
+                        {{-- <li> <a href="{{ route('doctor-list-by-division','6')}}">Dhaka</a></li>
+                        <li> <a href="{{ route('doctor-list-by-division','1')}}">Chittagong</a></li>
+                        <li> <a href="{{ route('doctor-list-by-division','5')}}">Sylhet</a></li>
+                        <li> <a href="{{ route('doctor-list-by-division','8')}}">Mymensingh</a></li> --}}
+
                         <li> <a href="#">Dhaka</a></li>
                         <li> <a href="#">Chittagong</a></li>
                         <li> <a href="#">Sylhet</a></li>
-                        <li> <a href="#">Cumilla</a></li>
+                        <li> <a href="#">Mymensingh</a></li>
                     </ul>
                 </div>
             </div>
