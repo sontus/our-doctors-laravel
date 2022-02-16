@@ -17,7 +17,14 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $reviews = Review::latest()->get();
+            return view('backend.review.index',compact('reviews'));
+        }
+        catch (\Exception $e) {
+            Toastr::warning($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**
@@ -60,7 +67,8 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        //
+        return response()->json(['row_data' => $review],200);
+    
     }
 
     /**
@@ -70,9 +78,22 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Request $request, Review $review_id)
     {
-        //
+      
+        try{
+            $review = Review::findOrFail($request->old_id);
+
+            $review->row_status       = $request->row_status;
+            $review->update();
+    
+            Toastr::success('Review Successfully Update');
+            return redirect()->back();
+        }
+        catch (\Exception $e) {
+            Toastr::warning($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**
@@ -83,6 +104,14 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        try{
+            $review->delete();
+            Toastr::success('Review Successfully Deleted');
+            return redirect()->back();
+        }
+        catch (\Exception $e) {
+            Toastr::warning($e->getMessage());
+            return redirect()->back();
+        }
     }
 }

@@ -134,8 +134,8 @@
                                         <label for="doctor_category">Categories <span class="req">*</span> </label>
                                         <select name="doctor_category" id="doctor_category" class="form-control">
                                             @php
-                                                $categories = app\Models\Category::where('row_status',true)->latest()->get();
-                                                $hospitals  = app\Models\Hospital::where('row_status',true)->latest()->get();
+                                                $categories = \DB::table('categories')->where('row_status',true)->latest()->get();
+                                                $hospitals  = \DB::table('hospitals')->where('row_status',true)->latest()->get();
                                             @endphp
                                             @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>

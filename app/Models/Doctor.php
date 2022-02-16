@@ -28,5 +28,10 @@ class Doctor extends Model
         return $this->hasMany(Chamber::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 
 }

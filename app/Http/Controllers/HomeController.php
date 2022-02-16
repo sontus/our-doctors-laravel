@@ -98,7 +98,7 @@ class HomeController extends Controller
     public function doctorDetails($id)
     {
         $details = Doctor::where('id',$id)->first();
-        $reviews = Review::where('doctor_id',$id)->get();
+        $reviews = Review::where('doctor_id',$id)->where('row_status',true)->get();
         return view('doctor-details',compact('details','reviews'));
     }
 

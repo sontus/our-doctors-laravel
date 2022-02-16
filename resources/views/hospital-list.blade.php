@@ -15,7 +15,7 @@
                 <img src="{{ asset('storage/hospitals/'.$hospital->logo)}}" alt="hospital">
                 <h5>{{ $hospital->name }}</h5>
                 <p>{{ $hospital->address }}</p>
-                <a href="{{ $hospital->map_location }}" class="btn btn-outline-success"><span class="fas fa-map-marker-alt ml-2" target="_blank"></span> Show on Maps</a>
+                <a href="{{ $hospital->map_location }}" class="btn btn-outline-success" target="_blank"><span class="fas fa-map-marker-alt ml-2" ></span> Show on Maps</a>
             </div>
         @endforeach
     </div>

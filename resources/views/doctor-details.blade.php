@@ -65,7 +65,7 @@
     </div>
     <div class="row mb-5">
         <div class="col-sm-4 col-md-4 col-lg-4 offset-md-4">
-            <button class="btn doctor-detail-action">Call for appointment : <span>{{$chamber->hospital->phone}}</span> </button>
+            <button class="btn doctor-detail-action">Call for appointment : <span>{{$chamber->mobile}}</span> </button>
         </div>
     </div>
     @endforeach
