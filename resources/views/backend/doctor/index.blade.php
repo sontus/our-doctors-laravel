@@ -276,10 +276,13 @@
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
-                                        <label for="edit_doctor_address">Doctor Address <span class="req">*</span> </label>
-                                        <input type="text" class="form-control" id="edit_doctor_address" name="doctor_address" value="{{old('doctor_address', empty($errors->doctor_address) ? '' : $errors->doctor_address)}}" placeholder="Doctor Mobile">
-                                        @if ($errors->has('doctor_address'))
-                                            <span class="text-danger">{{ $errors->first('doctor_address') }}</span>
+                                        <label for="row_status">Doctor Status <span class="req">*</span> </label>
+                                        <select name="row_status" id="row_status" class="form-control" required>
+                                            <option value="1" {{old('row_status')==1 ? 'selected' : ''}}>Published</option>
+                                            <option value="0" {{old('row_status')==0 ? 'selected' : ''}}>Inactive</option>
+                                        </select>
+                                        @if ($errors->has('row_status'))
+                                            <span class="text-danger">{{ $errors->first('row_status') }}</span>
                                         @endif
                                     </div>
                                     <div class="col-md-6">

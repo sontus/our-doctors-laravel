@@ -22,7 +22,7 @@ class CreateDoctorsTable extends Migration
             $table->string('mobile');
             $table->string('address');
             $table->string('age');
-            $table->text('details');
+            $table->text('details')->nullable();
             $table->string('image');
             $table->foreign('category_id')
                     ->references('id')->on('categories')

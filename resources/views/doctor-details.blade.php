@@ -2,7 +2,59 @@
 @section('title','Doctor Details')
 
 @push('css')
+    <style>
+        /** rating **/
+        div.stars {
+        display: inline-block;
+        }
 
+        input.star { display: none; }
+
+        label.star {
+        float: right;
+        padding: 10px;
+        font-size: 20px;
+        color:
+        #444;
+        transition: all .2s;
+        }
+
+        input.star:checked ~ label.star:before {
+        content: 'f005';
+        color:
+        #e74c3c;
+        transition: all .25s;
+        }
+
+        input.star-5:checked ~ label.star:before {
+        color:
+        #e74c3c;
+        text-shadow: 0 0 5px
+        #7f8c8d;
+        }
+
+        input.star-1:checked ~ label.star:before { color:
+        #F62; }
+
+        label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+        label.star:before {
+        content: 'f006';
+        font-family: FontAwesome;
+        }
+
+
+        .horline > li:not(:last-child):after {
+            content: " |";
+        }
+        .horline > li {
+        font-weight: bold;
+        color:
+        #ff7e1a;
+
+        }
+        /** end rating **/
+    </style>
 @endpush
 
 @section('content')
@@ -15,8 +67,9 @@
             <h4>{{ $details->name }}</h4>
             <p>{{ $details->category->name}}  |  Experience {{ $details->age}}+ years</p>
             <p>{{ $details->degree}}</p>
-            <span>
-                <div class="star">
+            <span></span>
+                <h6>{{ round($avgStar,2) }} <i class="fas fa-star" style="color:#ff7e1a;"></i> out of ({{$reviews->count()}} reviews)</h6>
+                {{-- <div class="star">
                     <ul>
                         <li> <i class="fas fa-star"></i></li>
                         <li> <i class="fas fa-star"></i></li>
@@ -24,8 +77,9 @@
                         <li> <i class="fas fa-star"></i></li>
                         <li> <i class="fas fa-star"></i></li>
                     </ul>
-                </div>
-            </span>
+
+                </div> --}}
+
             <p>{{ $details->details}}</p>
         </div>
     </div>
@@ -70,7 +124,14 @@
     </div>
     @endforeach
 </div>
-
+@guest
+<div class="row mb-5">
+    <div class="col-sm-4 col-md-4 col-lg-4 offset-md-4">
+        <button class="btn doctor-detail-action" data-bs-toggle="modal" data-bs-target="#login" >For Write Review.Login or Signup</button>
+        {{-- <button class="btn doctor-detail-action" data-bs-toggle="modal" data-bs-target="#login" >For Write Review. Click Here to Login</button> --}}
+    </div>
+</div>
+@else
 <div class="container">
     <div class="row add-review p-5">
         <h5>Whats your opinion about <b>{{ $details->name }}</b> </h5>
@@ -80,13 +141,15 @@
             <p class="m-2">Rate this doctor in terms of helpfulness, punctuallity, knowledge</p>
 
             <div class="add-review-star">
-                <ul>
-                    <li> <a href="#"><i class="fas fa-star"></i></a></li>
-                    <li> <a href="#"><i class="fas fa-star"></i></a></li>
-                    <li> <a href="#"><i class="fas fa-star"></i></a></li>
-                    <li> <a href="#"><i class="fas fa-star"></i></a></li>
-                    <li> <a href="#"><i class="fas fa-star"></i></a></li>
-                </ul>
+                <div class="col-md-4">
+                    <select name="star" id="star" class="form-control" required>
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Star</option>
+                        <option value="3">3 Star</option>
+                        <option value="4">4 Star</option>
+                        <option value="5">5 Star</option>
+                    </select>
+                </div>
             </div>
             <p class="m-2">What type of visit was it? In-Person Real-time video</p>
             <div class="radio-review d-flex justify-content-between col-md-4 m-2">
@@ -112,7 +175,7 @@
 
             <p class="m-2">Comment</p>
             <div class="comment-box m-2">
-                <input type="hidden" name="user_id" value="1">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id}}">
                 <input type="hidden" name="doctor_id" value="{{ $details->id }}">
                 <input type="hidden" name="rating" value="5">
                 <textarea class="form-control" name="comment" id="comment" cols="30" rows="4"></textarea>
@@ -124,25 +187,25 @@
     </form>
     </div>
 </div>
+@endguest
 
 <!-- reviews  -->
 <div class="container">
     <div class="row doctor-reviews">
         <h4>Reviews of {{ $details->name }}</h4>
+        <h6>{{ round($avgStar,2) }} <i class="fas fa-star" style="color:#ff7e1a;"></i> out of ({{$reviews->count()}} reviews)</h6>
         @foreach ($reviews as $review)
             <div class="col-sm-12 col-md-12 col-lg-12 mb-5 mt-5">
+                <span><strong>{{ $review->user->name}}</strong></span>
                 <div class="doctor-review d-flex justify-content-between">
+
                     <div class="star">
                         <ul>
-                            <li> <i class="fas fa-star"></i></li>
-                            <li> <i class="fas fa-star"></i></li>
-                            <li> <i class="fas fa-star"></i></li>
-                            <li> <i class="fas fa-star"></i></li>
-                            <li> <i class="fas fa-star"></i></li>
+                            <li>{{$review->rating}} <i class="fas fa-star"></i></li>
                         </ul>
                     </div>
                     <div class="date">
-                        <p>13 DEC 2021</p>
+                        <p>{{ date('d M Y',strtotime($review->created_at))}}</p>
                     </div>
                 </div>
                 <p>{{ $review->review}}</p>
@@ -158,5 +221,9 @@
 
 
 @push('js')
-
+<script>
+    $('#addStar').change('.star', function(e) {
+    $(this).submit();
+    });
+</script>
 @endpush

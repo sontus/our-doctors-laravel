@@ -27,7 +27,13 @@
         </div>
         <div class="row search-result mt-5">
             <p> <span class="fas fa-map-marker-alt ml-2"></span> Dhaka 947, East Shewrapara</p>
+
         </div>
+        @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
     </div>
 </div>
 <!-- search end -->
@@ -43,6 +49,7 @@
                         <li><a href="{{ route('doctor-category',$category->id)}}"> <button class="btn {{ $key == 0 ? 'btn-success' : '' }} ">{{ $category->name }}</button> </a></li>
                     @endforeach
                 </ul>
+                <a href="{{ route('doctor')}}" class="btn btn-outline-success">View all Departments</a>
             </div>
             <div class="col-sm-12 col-md-9 col-lg-9">
                 @foreach ($doctors as $key=> $doctor)
@@ -54,7 +61,12 @@
                             <h4> <a href="{{ route('doctor-detail',$doctor->id)}}"> {{ $doctor->name }}</a> </h4>
                             <p>{{ $doctor->category->name}}  |  Experience {{ $doctor->age}}+ years</p>
                             <p>{{ $doctor->degree}}</p>
-                            <div class="review-star-box">
+                            @php
+                                $avgStar = App\Models\Review::where('doctor_id', $doctor->id)->where('row_status', true)->avg('rating');
+                            @endphp
+                            <h6>{{ round($avgStar,2) }} <i class="fas fa-star" style="color:#ff7e1a;"></i> out of ({{$doctor->reviews->count()}} reviews)</h6>
+
+                            {{-- <div class="review-star-box">
                                 <div class="star">
                                     <ul>
                                         <li> <i class="fas fa-star"></i></li>
@@ -65,7 +77,7 @@
                                     </ul>
                                 </div>
 
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4">
                             <h5>{{ $doctor->hospital->name}}</h5>
@@ -75,8 +87,8 @@
                     </div>
                     <hr/>
                 @endforeach
+                <a href="{{ route('doctor')}}" class="btn btn-success">View All</a>
             </div>
-
         </div>
     </div>
     <!-- doctors end-->
@@ -90,7 +102,7 @@
                     <p>Share your experience with us and help thousands of people to choose the doctor</p>
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4">
-                    <button class="btn">Write a review</button>
+                    <button class="btn"><a href="{{ route('doctor')}}">Write a review</a> </button>
                 </div>
             </div>
         </div>
@@ -128,7 +140,7 @@
                     <p>
                         Your future patients are ready to connect. Make sure your profile stands out. Learn more about how to claim your free profile and get visible to thousands of patients.
                     </p>
-                    <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#signup">Claim your profile</button>
+                    <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#doctorsignup">Claim your profile</button>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 doctor-image">
                     <img src="assets/img/doctor.png" alt="doctor"/>

@@ -13,4 +13,10 @@ class Review extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+
+    // relationship with user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

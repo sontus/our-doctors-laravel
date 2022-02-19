@@ -63,7 +63,7 @@ class DoctorController extends Controller
             'doctor_details'    => 'required',
             'doctor_image'      => 'required|mimes:jpg,png,gif,jpeg|max:2048',
         ]);
-        
+
         try{
             $fileName = imageUploadWithCustomSize($request->doctor_image,"120","140","doctors");
 
@@ -78,7 +78,7 @@ class DoctorController extends Controller
             $doctor->details          = $request->doctor_details;
             $doctor->image            = $fileName;
             $doctor->save();
-    
+
             Toastr::success('Doctor Successfully Added');
             return redirect()->back();
         }
@@ -119,7 +119,7 @@ class DoctorController extends Controller
      */
     public function update(Request $request, Doctor $doctor_id)
     {
-        
+
         $this->validate($request,[
             'doctor_name'       => 'required',
             'doctor_degree'     => 'required',
@@ -127,11 +127,11 @@ class DoctorController extends Controller
             'doctor_hospital'   => 'required',
             'doctor_mobile'     => 'required',
             'doctor_experince'  => 'required',
-            'doctor_address'    => 'required',
+            // 'doctor_address'    => 'required',
             'doctor_details'    => 'required',
-            
+
         ]);
-        
+
         try{
             $doctor = Doctor::findOrFail($request->old_id);
 
@@ -147,7 +147,7 @@ class DoctorController extends Controller
                     Storage::disk('public')->delete('doctors/'.$doctor->image);
                 }
 
-                $fileName = imageUploadWithCustomSize($request->doctor_image,"120","140","doctors");;  // fileName, width, height, folderName 
+                $fileName = imageUploadWithCustomSize($request->doctor_image,"120","140","doctors");;  // fileName, width, height, folderName
             }
             else{
                 $fileName = $doctor->image;
@@ -161,9 +161,10 @@ class DoctorController extends Controller
             $doctor->degree           = $request->doctor_degree;
             $doctor->age              = $request->doctor_experince;
             $doctor->details          = $request->doctor_details;
+            $doctor->row_status          = $request->row_status;
             $doctor->image            = $fileName;
             $doctor->update();
-    
+
             Toastr::success('Doctor Successfully Added');
             return redirect()->back();
         }

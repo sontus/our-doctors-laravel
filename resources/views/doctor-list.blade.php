@@ -53,7 +53,12 @@
                             <h4> <a href="{{ route('doctor-detail',$doctor->id)}}"> {{ $doctor->name }}</a> </h4>
                             <p>{{ $doctor->category->name}}  |  Experience {{ $doctor->age}}+ years</p>
                             <p>{{ $doctor->degree}}</p>
-                            <div class="review-star-box">
+
+                            @php
+                                $avgStar = App\Models\Review::where('doctor_id', $doctor->id)->where('row_status', true)->avg('rating');
+                            @endphp
+                            <h6>{{ round($avgStar,2) }} <i class="fas fa-star" style="color:#ff7e1a;"></i> out of ({{$doctor->reviews->count()}} reviews)</h6>
+                            {{-- <div class="review-star-box">
                                 <div class="star">
                                     <ul>
                                         <li> <i class="fas fa-star"></i></li>
@@ -64,7 +69,7 @@
                                     </ul>
                                 </div>
 
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4">
                             <h5>{{ $doctor->hospital->name}}</h5>

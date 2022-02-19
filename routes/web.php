@@ -35,8 +35,13 @@ Route::get('/search-doctor',[App\Http\Controllers\HomeController::class, 'search
 Route::post('/doctor-register',[App\Http\Controllers\HomeController::class, 'doctor_register'])->name('doctor-register');
 Route::get('/doctor-list-by-division/{id}', [App\Http\Controllers\HomeController::class, 'doctor_list_by_division'])->name('doctor-list-by-division');
 
+Route::post('/member-login',[App\Http\Controllers\HomeController::class, 'member_login'])->name('member-login');
+Route::post('/member-register',[App\Http\Controllers\HomeController::class, 'member_register'])->name('member-register');
+Route::get('/member-dashboard',[App\Http\Controllers\HomeController::class, 'dashboard'])->name('member-dashboard');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/review-store', [App\Http\Controllers\HomeController::class, 'storeReview'])->name('review-store');
+
+Route::get('logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
 
 Route::group(['prefix'=>'admin','middleware' => 'auth'],function (){
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');

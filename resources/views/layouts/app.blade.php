@@ -38,7 +38,7 @@
     <script src="{{ asset('assets/js/custom.js')}}"></script>
      <!-- laravel-toastr css -->
    <!-- laravel-toastr css -->
-    {{-- <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script> --}}
+    <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="{{ asset('assets/backend/js/toastr.min.js')}}"></script>
     <!-- sweetalert2 css -->
     <script src="{{ asset('assets/backend/js/sweetalert2.min.js')}}"></script>
